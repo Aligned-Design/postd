@@ -44,6 +44,7 @@ Essential information for developers:
 | **[docs/development/SETUP.md](docs/development/SETUP.md)** | Complete local setup guide | 🟢 CANONICAL |
 | **[docs/development/QUICK_START.md](docs/development/QUICK_START.md)** | 5-minute quick start | 🟢 CANONICAL |
 | **[docs/development/DEV_MODE.md](docs/development/DEV_MODE.md)** | Comprehensive dev mode documentation | 🟢 CANONICAL |
+| **[docs/development/DOC_MAINTENANCE.md](docs/development/DOC_MAINTENANCE.md)** | How to maintain documentation quality | 🟢 CANONICAL |
 | **[DEV_MODE_SETUP.md](DEV_MODE_SETUP.md)** | Quick reference for enabling dev mode | 🟢 CANONICAL |
 
 ---

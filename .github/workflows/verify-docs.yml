@@ -1,0 +1,68 @@
+name: Documentation Verification
+
+on:
+  pull_request:
+    paths:
+      - '**.md'
+      - 'scripts/verify-*.mjs'
+      - 'DOCS_INDEX.md'
+      - 'docs/**'
+  push:
+    branches:
+      - main
+    paths:
+      - '**.md'
+      - 'scripts/verify-*.mjs'
+      - 'DOCS_INDEX.md'
+      - 'docs/**'
+
+jobs:
+  verify:
+    name: Verify Documentation
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Run documentation verification
+        run: |
+          echo "🔍 Verifying documentation status tags..."
+          node scripts/verify-doc-status.mjs
+          
+          echo ""
+          echo "🔍 Checking for orphaned documents..."
+          node scripts/verify-doc-orphans.mjs
+          
+          echo ""
+          echo "🔍 Validating internal links..."
+          node scripts/verify-doc-links.mjs
+          
+          echo ""
+          echo "✅ All documentation verifications passed!"
+      
+      - name: Summary
+        if: success()
+        run: |
+          echo "### ✅ Documentation Verification Passed" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "All documentation checks passed successfully:" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Status tags verified" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ No orphaned documents" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ All internal links working" >> $GITHUB_STEP_SUMMARY
+      
+      - name: Failure Summary
+        if: failure()
+        run: |
+          echo "### ❌ Documentation Verification Failed" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Documentation verification failed. Please:" >> $GITHUB_STEP_SUMMARY
+          echo "1. Review the error messages above" >> $GITHUB_STEP_SUMMARY
+          echo "2. Run \`npm run verify:docs\` locally" >> $GITHUB_STEP_SUMMARY
+          echo "3. Fix any issues before merging" >> $GITHUB_STEP_SUMMARY
+
