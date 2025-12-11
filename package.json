@@ -7,16 +7,25 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "verify:docs": "node scripts/verify-doc-status.mjs && node scripts/verify-doc-orphans.mjs && node scripts/verify-doc-links.mjs",
+    "verify:docs:status": "node scripts/verify-doc-status.mjs",
+    "verify:docs:orphans": "node scripts/verify-doc-orphans.mjs",
+    "verify:docs:links": "node scripts/verify-doc-links.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.0",
     "@supabase/ssr": "^0.0.10",
+    "cheerio": "^1.0.0-rc.12",
     "next": "14.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.40.1",
     "@types/node": "^20.10.5",
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.18",
