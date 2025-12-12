@@ -190,8 +190,15 @@ export async function getWorkspace(
     return null
   }
 
+  // Supabase returns workspace as a single object (not array) when using foreign key
+  const workspace = Array.isArray(data.workspace) ? data.workspace[0] : data.workspace
+  
+  if (!workspace) {
+    return null
+  }
+
   return {
-    ...data.workspace,
+    ...workspace,
     role: data.role,
   } as WorkspaceWithRole
 }
