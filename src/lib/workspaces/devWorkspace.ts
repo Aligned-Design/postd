@@ -29,6 +29,8 @@ export interface DevWorkspaceContext {
     id: string
     name: string
     role: string
+    created_by: string
+    created_at: string
   }
   user: {
     id: string
@@ -55,6 +57,8 @@ export function getDevWorkspace(): DevWorkspaceContext {
       id: devWorkspaceId,
       name: 'Dev Workspace',
       role: 'owner',
+      created_by: 'dev-user',
+      created_at: new Date().toISOString(),
     },
     user: {
       id: 'dev-user',
