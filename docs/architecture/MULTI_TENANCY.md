@@ -1,3 +1,6 @@
+> **STATUS: 🟢 CANONICAL**  
+> This document is current and treated as a source of truth.
+
 # Multi-Tenancy in POSTD
 
 ## Overview

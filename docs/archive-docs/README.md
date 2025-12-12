@@ -38,6 +38,10 @@ Workspace RLS policy fixes from November 19, 2025:
 Dev mode implementation report from December 11, 2025:
 - DEV_MODE_SAFETY_REPORT.md
 
+### `2025-12-12-drift-prevention/` (1 document)
+Comprehensive drift prevention system implementation from December 12, 2025:
+- IMPLEMENTATION_SUMMARY.md
+
 ### `phase-completions/` (2 documents)
 Phase completion summaries and verification checklists:
 - PHASE_0_1_VERIFICATION.md

@@ -1,9 +1,23 @@
+import { isDevMode } from '@/lib/devMode'
+import { getDevWorkspace } from '@/lib/workspaces/devWorkspace'
 import { getActiveWorkspaceFromRequest } from '@/lib/workspaces/getActiveWorkspace'
 import { NextResponse } from 'next/server'
 
+/**
+ * GET /api/app/active-workspace
+ * 
+ * SAFETY:
+ * - Automatically handles dev mode and production auth
+ * - Dev mode: Returns dev workspace
+ * - Production: Returns authenticated user's workspace
+ */
+
 export async function GET() {
   try {
-    const context = await getActiveWorkspaceFromRequest()
+    // CONDITIONAL LOGIC: Dev mode vs Production
+    const context = isDevMode() 
+      ? getDevWorkspace()
+      : await getActiveWorkspaceFromRequest()
 
     if (!context) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })

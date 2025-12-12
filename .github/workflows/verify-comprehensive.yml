@@ -1,0 +1,84 @@
+name: Comprehensive Verification
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+    paths:
+      - 'supabase/migrations/**'
+      - 'src/app/api/**'
+      - 'src/lib/types/**'
+      - 'src/components/**'
+      - 'src/lib/**'
+      - 'package.json'
+      - 'scripts/verify-*.mjs'
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  verify-schema-api-code:
+    name: Schema, API & Code Verification
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install deps
+        run: npm install
+      
+      - name: Verify schema & RLS
+        run: npm run verify:schema
+      
+      - name: Verify API contracts
+        run: npm run verify:api
+      
+      - name: Verify code health
+        run: npm run verify:code
+      
+      - name: Comment on PR (if failed)
+        if: failure() && github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const failureMessage = `
+            ❌ **Comprehensive Verification Failed**
+            
+            One or more verification checks failed. Please review the logs above for details.
+            
+            **Verification Layers:**
+            - 🗄️ Schema & RLS consistency
+            - 🔌 API contract compliance
+            - 🧹 Code health & quality
+            
+            **Fix Instructions:**
+            1. Check the Actions tab for detailed error messages
+            2. Run \`npm run verify:all\` locally to reproduce
+            3. See \`docs/development/VERIFICATION_GUIDE.md\` for help
+            `;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: failureMessage
+            });
+      
+      - name: Upload verification reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: comprehensive-verification-report
+          path: |
+            *.md
+            scripts/*.mjs
+

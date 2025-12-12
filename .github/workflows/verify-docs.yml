@@ -1,68 +1,69 @@
 name: Documentation Verification
 
 on:
-  pull_request:
+  push:
+    branches:
+      - main
+      - develop
     paths:
       - '**.md'
       - 'scripts/verify-*.mjs'
-      - 'DOCS_INDEX.md'
-      - 'docs/**'
-  push:
+      - '.github/workflows/verify-docs.yml'
+  pull_request:
     branches:
       - main
     paths:
       - '**.md'
       - 'scripts/verify-*.mjs'
-      - 'DOCS_INDEX.md'
-      - 'docs/**'
+      - '.github/workflows/verify-docs.yml'
 
 jobs:
-  verify:
-    name: Verify Documentation
+  verify-documentation:
+    name: Verify Documentation Quality
     runs-on: ubuntu-latest
+    # This job is a REQUIRED check for PRs to main
     
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-      
-      - name: Run documentation verification
-        run: |
-          echo "🔍 Verifying documentation status tags..."
-          node scripts/verify-doc-status.mjs
-          
-          echo ""
-          echo "🔍 Checking for orphaned documents..."
-          node scripts/verify-doc-orphans.mjs
-          
-          echo ""
-          echo "🔍 Validating internal links..."
-          node scripts/verify-doc-links.mjs
-          
-          echo ""
-          echo "✅ All documentation verifications passed!"
-      
-      - name: Summary
-        if: success()
-        run: |
-          echo "### ✅ Documentation Verification Passed" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "All documentation checks passed successfully:" >> $GITHUB_STEP_SUMMARY
-          echo "- ✅ Status tags verified" >> $GITHUB_STEP_SUMMARY
-          echo "- ✅ No orphaned documents" >> $GITHUB_STEP_SUMMARY
-          echo "- ✅ All internal links working" >> $GITHUB_STEP_SUMMARY
-      
-      - name: Failure Summary
-        if: failure()
-        run: |
-          echo "### ❌ Documentation Verification Failed" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "Documentation verification failed. Please:" >> $GITHUB_STEP_SUMMARY
-          echo "1. Review the error messages above" >> $GITHUB_STEP_SUMMARY
-          echo "2. Run \`npm run verify:docs\` locally" >> $GITHUB_STEP_SUMMARY
-          echo "3. Fix any issues before merging" >> $GITHUB_STEP_SUMMARY
+          node-version: '20'
+          cache: 'npm'
 
+      - name: Install dependencies
+        run: npm install
+
+      - name: Verify documentation status tags
+        run: npm run verify:docs:status
+
+      - name: Verify no orphaned documents
+        run: npm run verify:docs:orphans
+
+      - name: Verify internal links
+        run: npm run verify:docs:links
+
+      - name: Run full verification suite
+        run: npm run verify:docs
+
+      - name: Comment verification results on PR
+        if: github.event_name == 'pull_request' && failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '❌ Documentation verification failed. Please run `npm run verify:docs` locally to see specific errors.'
+            })
+
+      - name: Upload verification report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs-verification-report
+          path: DOCS_VERIFICATION_REPORT.md
+          retention-days: 30

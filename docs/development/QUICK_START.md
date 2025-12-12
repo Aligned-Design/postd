@@ -1,3 +1,6 @@
+> **STATUS: 🟢 CANONICAL**  
+> This document is current and treated as a source of truth.
+
 # POSTD Quick Start
 
 Get POSTD running in 5 minutes.
@@ -79,7 +82,7 @@ docs/             # Documentation
 - `src/app/page.tsx` - Landing page
 - `src/app/app/page.tsx` - Dashboard
 - `src/lib/workspaces/` - Workspace logic
-- `docs/ARCHITECTURE.md` - System design
+- `docs/architecture/ARCHITECTURE.md` - System design
 
 ## Common Commands
 
@@ -92,14 +95,14 @@ npm run format   # Format code
 
 ## Need Help?
 
-- 📖 [Detailed Setup Guide](./docs/SETUP.md)
-- 🏗️ [Architecture Overview](./docs/ARCHITECTURE.md)
-- 🏢 [Multi-Tenancy Design](./docs/MULTI_TENANCY.md)
-- 🔌 [API Reference](./docs/API.md)
+- 📖 [Detailed Setup Guide](./SETUP.md)
+- 🏗️ [Architecture Overview](../architecture/ARCHITECTURE.md)
+- 🏢 [Multi-Tenancy Design](../architecture/MULTI_TENANCY.md)
+- 🔌 [API Reference](../architecture/API.md)
 
 ## What's Next?
 
-Check out [docs/PROJECT_STATUS.md](./docs/PROJECT_STATUS.md) to see:
+Check out [docs/current-status/PROJECT_STATUS.md](../current-status/PROJECT_STATUS.md) to see:
 - What's been built
 - What's coming next (Phase 2-6)
 - How to contribute

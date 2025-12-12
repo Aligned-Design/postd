@@ -1,6 +1,9 @@
+> **STATUS: 🔴 ARCHIVED**  
+> This document is kept for historical reference and is not actively maintained.
+
 # POSTD — Phase 0 & 1 Verification Checklist
 
-This checklist confirms that Phase 0 (foundation) and Phase 1 (auth + workspaces) are implemented and working as expected.
+**Historical Checklist** - This checklist was used to verify Phase 0 (foundation) and Phase 1 (auth + workspaces) completion. Both phases are now complete as of December 2025.
 
 Run through these steps in order and check them off.
 
@@ -50,7 +53,7 @@ As a **logged-out** user:
 
 - [ ] Visiting `/` shows a public landing screen.
 
-- [ ] The page mentions POSTD v2 (or similar branding).
+- [ ] The page mentions POSTD (or similar branding).
 
 - [ ] There is a clear **"Log in / Sign up"** button or link to `/login`.
 

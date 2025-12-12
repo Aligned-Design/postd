@@ -24,3 +24,6 @@ export interface WorkspaceWithRole extends Workspace {
   role: 'owner' | 'member'
 }
 
+// Re-export source types
+export type { Source, SourceType, CrawledPage, WebsiteSourceConfig } from './sources'
+

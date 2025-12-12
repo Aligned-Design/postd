@@ -1,3 +1,6 @@
+> **STATUS: 🟢 CANONICAL**  
+> This document is current and treated as a source of truth.
+
 # POSTD API Reference
 
 This document describes the API routes available in POSTD.

@@ -1,15 +1,27 @@
+> **STATUS: 🟢 CANONICAL**  
+> This document is current and treated as a source of truth.
+
 # POSTD
 
 **Marketing content that's always on-brand.**
 
 POSTD is a marketing content system that ingests your website and social presence to generate on-brand content powered by AI.
 
+## 📖 Using the Docs
+
+POSTD's documentation is organized and indexed in **[DOCS_INDEX.md](./DOCS_INDEX.md)** for easy navigation.
+
+**Quick links:**
+- **Product & Architecture** → [docs/architecture/ARCHITECTURE.md](./docs/architecture/ARCHITECTURE.md) and [DOCS_INDEX.md](./DOCS_INDEX.md)
+- **Setup** → [docs/development/SETUP.md](./docs/development/SETUP.md) and [docs/development/QUICK_START.md](./docs/development/QUICK_START.md)
+- **Dev Mode** → [DEV_MODE_SETUP.md](./DEV_MODE_SETUP.md) and [docs/development/DEV_MODE.md](./docs/development/DEV_MODE.md)
+
 ## 🚀 Quick Start
 
 ### Prerequisites
 
 - Node.js 18+ or pnpm
-- A Supabase account ([sign up here](https://supabase.com))
+- A Supabase account (sb_publishable_I8qdcyhHU68BYhcNZ4Fepg_1vPzJUP2)
 
 ### Installation
 
@@ -91,7 +103,7 @@ POSTD is built with:
 - **Database**: PostgreSQL via Supabase
 - **Auth**: Supabase Auth
 
-For detailed architecture information, see [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md).
+For detailed architecture information, see [docs/architecture/ARCHITECTURE.md](./docs/architecture/ARCHITECTURE.md).
 
 ## 🎯 Current Features (Phase 0 & 1)
 
@@ -139,9 +151,11 @@ For detailed architecture information, see [docs/ARCHITECTURE.md](./docs/ARCHITE
 
 ## 📚 Documentation
 
-- [ARCHITECTURE.md](./docs/ARCHITECTURE.md) - System architecture and design decisions
-- [MULTI_TENANCY.md](./docs/MULTI_TENANCY.md) - Multi-tenant workspace design
+- [ARCHITECTURE.md](./docs/architecture/ARCHITECTURE.md) - System architecture and design decisions
+- [MULTI_TENANCY.md](./docs/architecture/MULTI_TENANCY.md) - Multi-tenant workspace design
 - [supabase/README.md](./supabase/README.md) - Database migration guide
+
+For complete documentation, see [DOCS_INDEX.md](./DOCS_INDEX.md)
 
 ## 🧪 Development
 
@@ -156,6 +170,25 @@ Format code:
 ```bash
 npm run format
 ```
+
+### Testing
+
+Run end-to-end tests:
+```bash
+# Install Playwright (first time only)
+npx playwright install
+
+# Run tests
+npm test
+
+# Run tests with UI
+npm run test:ui
+
+# Run tests in headed mode
+npm run test:headed
+```
+
+See `tests/README.md` for more testing information.
 
 ### Building for Production
 

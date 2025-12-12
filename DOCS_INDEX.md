@@ -45,6 +45,8 @@ Essential information for developers:
 | **[docs/development/QUICK_START.md](docs/development/QUICK_START.md)** | 5-minute quick start | 🟢 CANONICAL |
 | **[docs/development/DEV_MODE.md](docs/development/DEV_MODE.md)** | Comprehensive dev mode documentation | 🟢 CANONICAL |
 | **[docs/development/DOC_MAINTENANCE.md](docs/development/DOC_MAINTENANCE.md)** | How to maintain documentation quality | 🟢 CANONICAL |
+| **[docs/development/VERIFICATION_GUIDE.md](docs/development/VERIFICATION_GUIDE.md)** | Complete guide to drift audits and verification tools | 🟢 CANONICAL |
+| **[docs/development/RELEASE_CHECKLIST.md](docs/development/RELEASE_CHECKLIST.md)** | 🚀 Pre-release verification and deployment checklist | 🟢 CANONICAL |
 | **[DEV_MODE_SETUP.md](DEV_MODE_SETUP.md)** | Quick reference for enabling dev mode | 🟢 CANONICAL |
 
 ---
@@ -69,16 +71,19 @@ Where we are and what's next:
 |----------|-------------|--------|
 | **[docs/current-status/PROJECT_STATUS.md](docs/current-status/PROJECT_STATUS.md)** | Phase completion status, roadmap, features | 🟢 CANONICAL |
 | **[DOCS_VERIFICATION_REPORT.md](DOCS_VERIFICATION_REPORT.md)** | Automated documentation verification results | 🟢 CANONICAL |
+| **[DRIFT_PREVENTION_COMPLETE.md](DRIFT_PREVENTION_COMPLETE.md)** | ⚡ Quick reference for drift prevention system | 🟢 CANONICAL |
+| **[COMPREHENSIVE_DRIFT_PREVENTION_SUMMARY.md](COMPREHENSIVE_DRIFT_PREVENTION_SUMMARY.md)** | Complete drift prevention system implementation summary | 🟢 CANONICAL |
 
 ---
 
 ## 🔌 Database & Infrastructure
 
-Database setup, migrations, and configuration:
+Database setup, migrations, configuration, and CI/CD:
 
 | Document | Description | Status |
 |----------|-------------|--------|
 | **[supabase/README.md](supabase/README.md)** | Migration guide, RLS setup, troubleshooting | 🟢 CANONICAL |
+| **[.github/workflows/README.md](.github/workflows/README.md)** | GitHub Actions workflows documentation | 🟢 CANONICAL |
 
 ---
 

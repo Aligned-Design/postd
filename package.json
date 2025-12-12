@@ -14,7 +14,11 @@
     "verify:docs": "node scripts/verify-doc-status.mjs && node scripts/verify-doc-orphans.mjs && node scripts/verify-doc-links.mjs",
     "verify:docs:status": "node scripts/verify-doc-status.mjs",
     "verify:docs:orphans": "node scripts/verify-doc-orphans.mjs",
-    "verify:docs:links": "node scripts/verify-doc-links.mjs"
+    "verify:docs:links": "node scripts/verify-doc-links.mjs",
+    "verify:schema": "node scripts/verify-schema-drift.mjs",
+    "verify:api": "node scripts/verify-api-drift.mjs",
+    "verify:code": "node scripts/verify-code-health.mjs",
+    "verify:all": "npm run verify:docs && npm run verify:schema && npm run verify:api && npm run verify:code"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.0",

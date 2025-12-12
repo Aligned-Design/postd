@@ -1,3 +1,6 @@
+> **STATUS: 🟢 CANONICAL**  
+> This document is current and treated as a source of truth.
+
 # POSTD Architecture
 
 ## Overview
@@ -43,6 +46,8 @@ POSTD/
 │   ├── lib/                   # Business logic & utilities
 │   │   ├── supabase/         # Supabase client helpers
 │   │   ├── workspaces/       # Workspace domain logic
+│   │   ├── sources/          # Source management (Phase 2)
+│   │   ├── crawler/          # Website crawler (Phase 2)
 │   │   └── types/            # Shared TypeScript types
 │   └── hooks/                 # Custom React hooks
 ├── supabase/
@@ -82,7 +87,46 @@ POSTD uses **Supabase Auth** for authentication:
 
 See [MULTI_TENANCY.md](./MULTI_TENANCY.md) for detailed information.
 
-### 3. Component Architecture
+### 3. Website Ingestion (Phase 2)
+
+POSTD can crawl and analyze your website to understand your brand voice and content style.
+
+**Database Schema:**
+- **`sources`** table: Tracks connected data sources (websites, social accounts)
+  - Generic design: `type` field distinguishes between 'website', 'instagram', etc.
+  - Configuration stored in JSONB `config` field
+  - All sources are workspace-scoped
+
+- **`crawled_pages`** table: Stores extracted website content
+  - Contains cleaned text, title, raw HTML
+  - Metadata includes word count, h1 tags, meta descriptions
+  - Linked to source via `source_id`
+  - All pages are workspace-scoped
+
+**Crawler Implementation:**
+- Location: `src/lib/crawler/websiteCrawler.ts`
+- Uses `cheerio` for HTML parsing
+- Extracts main content (prefers `<main>`, `<article>` tags)
+- Follows internal links up to configurable limit (default: 10 pages)
+- Stores results via upsert (prevents duplicates)
+
+**API Routes:**
+- `POST /api/workspaces/[workspaceId]/sources/website`: Create source & trigger crawl
+- `GET /api/workspaces/[workspaceId]/sources`: List all sources with stats
+- `GET /api/workspaces/[workspaceId]/crawled-pages`: List all crawled pages
+
+**Frontend Components:**
+- `WebsiteConnector`: Form to add website URL and trigger crawl
+- `CrawledPagesList`: Display connected websites and crawled pages
+
+**Future Enhancements (TODOs):**
+- Respect robots.txt
+- Sitemap parsing
+- Smarter content extraction
+- Incremental re-crawling
+- Larger page limits with background jobs
+
+### 4. Component Architecture
 
 **UI Components** (`src/components/ui/`):
 - Reusable, unstyled-first components
@@ -94,7 +138,7 @@ See [MULTI_TENANCY.md](./MULTI_TENANCY.md) for detailed information.
 - AppHeader: Authenticated app navigation
 - WorkspaceSwitcher: Workspace selection dropdown
 
-### 4. Type Safety
+### 5. Type Safety
 
 All domain types are defined in `src/lib/types/index.ts`:
 - `User`: User profile data
@@ -102,7 +146,7 @@ All domain types are defined in `src/lib/types/index.ts`:
 - `WorkspaceMember`: Workspace membership
 - `WorkspaceWithRole`: Workspace with user's role
 
-### 5. API Routes
+### 6. API Routes
 
 API routes follow REST conventions:
 - `GET /api/app/active-workspace`: Get current workspace context

@@ -1,3 +1,6 @@
+> **STATUS: 🟢 CANONICAL**  
+> This document is current and treated as a source of truth.
+
 # POSTD — Builder Rules & Development Standards
 
 These rules must be followed for ALL future work in this repository. Cursor, you must read and respect this file before making changes.

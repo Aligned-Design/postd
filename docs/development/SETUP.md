@@ -1,3 +1,6 @@
+> **STATUS: 🟢 CANONICAL**  
+> This document is current and treated as a source of truth.
+
 # POSTD Setup Guide
 
 Complete setup instructions for getting POSTD running locally.
@@ -26,7 +29,7 @@ pnpm install
 
 1. In your Supabase dashboard, go to **Settings → API**
 2. Copy the following:
-   - **Project URL** (looks like `https://xxxxx.supabase.co`)
+   - **Project URL**: `https://btyczuatitwjduotkcrn.supabase.co`
    - **anon public** key (long string starting with `eyJ...`)
 
 ### 4. Configure Environment Variables
@@ -38,8 +41,8 @@ cp .env.local.example .env.local
 
 2. Edit `.env.local` and paste your Supabase credentials:
 ```bash
-NEXT_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGci0iJI...your-actual-key
+NEXT_PUBLIC_SUPABASE_URL=https://btyczuatitwjduotkcrn.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ0eWN6dWF0aXR3amR1b3RrY3JuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM1NTk3ODMsImV4cCI6MjA3OTEzNTc4M30.jICuN8TpCX7GZuPGDbhKQxXKxRLfX5-hEIG2tZxZPBQ
 ```
 
 ### 5. Apply Database Migrations
@@ -67,7 +70,7 @@ npm install -g supabase
 supabase login
 
 # Link to your project
-supabase link --project-ref your-project-id
+supabase link --project-ref btyczuatitwjduotkcrn
 
 # Apply migrations
 supabase db push
@@ -76,7 +79,7 @@ supabase db push
 #### Option C: Using psql (Advanced)
 
 ```bash
-psql -h db.your-project-id.supabase.co -U postgres -d postgres -f supabase/migrations/001_create_workspaces.sql
+psql -h db.btyczuatitwjduotkcrn.supabase.co -U postgres -d postgres -f supabase/migrations/001_create_workspaces.sql
 ```
 
 ### 6. Verify Database Setup
@@ -180,8 +183,8 @@ npm run dev
 
 Once setup is complete:
 
-1. Read [ARCHITECTURE.md](./ARCHITECTURE.md) to understand the system
-2. Read [MULTI_TENANCY.md](./MULTI_TENANCY.md) to understand workspaces
+1. Read [ARCHITECTURE.md](../architecture/ARCHITECTURE.md) to understand the system
+2. Read [MULTI_TENANCY.md](../architecture/MULTI_TENANCY.md) to understand workspaces
 3. Start building Phase 2 features!
 
 ## Production Deployment
