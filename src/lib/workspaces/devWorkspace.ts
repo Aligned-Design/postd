@@ -28,7 +28,7 @@ export interface DevWorkspaceContext {
   workspace: {
     id: string
     name: string
-    role: string
+    role: 'owner' | 'member'
     created_by: string
     created_at: string
   }
