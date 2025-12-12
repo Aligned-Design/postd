@@ -33,7 +33,7 @@ export default function LoginPage() {
 
   // If already logged in, redirect to /app
   useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => {
+    supabase.auth.getUser().then(({ data }: { data: any }) => {
       if (data?.user) {
         router.replace('/app')
       }
