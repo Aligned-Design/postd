@@ -41,6 +41,23 @@ export default async function AppLayout({
       <div className="flex min-h-screen flex-col">
         <AppHeader workspace={context.workspace} userEmail={context.user.email} />
         <main className="flex-1">{children}</main>
+        
+        {/* Build indicator */}
+        <div style={{ 
+          position: 'fixed', 
+          bottom: 10, 
+          right: 10, 
+          background: 'rgba(255, 105, 180, 0.9)', 
+          padding: '4px 8px',
+          fontSize: '11px',
+          fontFamily: 'monospace',
+          borderRadius: '4px',
+          zIndex: 9999,
+          color: 'white',
+          fontWeight: 'bold'
+        }}>
+          BUILD: {process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA?.slice(0, 7) ?? 'local'}
+        </div>
       </div>
     )
   }
@@ -65,6 +82,23 @@ export default async function AppLayout({
       <div className="flex min-h-screen flex-col">
         <AppHeader workspace={context.workspace} userEmail={context.user.email} />
         <main className="flex-1">{children}</main>
+        
+        {/* Build indicator */}
+        <div style={{ 
+          position: 'fixed', 
+          bottom: 10, 
+          right: 10, 
+          background: 'rgba(255, 105, 180, 0.9)', 
+          padding: '4px 8px',
+          fontSize: '11px',
+          fontFamily: 'monospace',
+          borderRadius: '4px',
+          zIndex: 9999,
+          color: 'white',
+          fontWeight: 'bold'
+        }}>
+          BUILD: {process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA?.slice(0, 7) ?? 'local'}
+        </div>
       </div>
     )
   } catch (error) {
