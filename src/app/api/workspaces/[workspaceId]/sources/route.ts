@@ -41,7 +41,7 @@ export async function GET(
     
     // For each source, count crawled pages and get latest crawl time
     const sourcesWithStats = await Promise.all(
-      (sources || []).map(async (source) => {
+      (sources || []).map(async (source: any) => {
         const { count } = await supabase
           .from('crawled_pages')
           .select('*', { count: 'exact', head: true })
